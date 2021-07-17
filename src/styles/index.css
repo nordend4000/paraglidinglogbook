@@ -1,0 +1,50 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: fit-content;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: rgb(25, 24, 24);
+	background: linear-gradient(
+		0deg,
+		rgba(25, 24, 24, 1) 0%,
+		rgba(40, 44, 52, 1) 45%,
+		rgba(34, 34, 34, 1) 100%
+	);
+}
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	font-size: 12px;
+	background-color: #88acc7;
+	color: #186dad;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+.tooltiptext-center {
+	left: 0;
+	top: 50px;
+}
+.tooltiptext-left {
+	left: -250%;
+	top: 10px;
+}
+.tooltiptext-right {
+	left: 100%;
+	top: 10px;
+}
