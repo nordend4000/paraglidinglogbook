@@ -34,7 +34,7 @@ function Gliders({
 	function saveGlider(e) {
 		e.preventDefault()
 		if (idToUpdate) {
-			return Axios.put("http://localhost:3001/updateGlider", {
+			return Axios.put(`${process.env.REACT_APP_DATABASE_URL}/updateGlider`, {
 				id: idToUpdate,
 				glider: glider,
 				brand: brand,
@@ -45,7 +45,7 @@ function Gliders({
 				intitializeGliderStates()
 			})
 		}
-		return Axios.post("http://localhost:3001/newGlider", {
+		return Axios.post(`${process.env.REACT_APP_DATABASE_URL}/newGlider`, {
 			glider: glider,
 			brand: brand,
 			hours: hours,
@@ -58,15 +58,17 @@ function Gliders({
 	function handleEditGlider(id) {
 		setIdToUpdate(id)
 		setAddGlider(true)
-		Axios.get(`http://localhost:3001/getGlider/${id}`).then(response => {
-			setGlider(response.data.glider || "")
-			setHours(response.data.hours || "")
-			setBrand(response.data.brand || "")
-			setPurchaseGlider(
-				format(new Date(response.data.purchase), "yyyy-MM-dd") || "",
-			)
-			setControl(format(new Date(response.data.control), "yyyy-MM-dd") || "")
-		})
+		Axios.get(`${process.env.REACT_APP_DATABASE_URL}/getGlider/${id}`).then(
+			response => {
+				setGlider(response.data.glider || "")
+				setHours(response.data.hours || "")
+				setBrand(response.data.brand || "")
+				setPurchaseGlider(
+					format(new Date(response.data.purchase), "yyyy-MM-dd") || "",
+				)
+				setControl(format(new Date(response.data.control), "yyyy-MM-dd") || "")
+			},
+		)
 	}
 	function intitializeGliderStates() {
 		getGlidersList()
@@ -142,7 +144,6 @@ function Gliders({
 							</div>
 						</div>
 					))}
-
 					{!addGlider ? (
 						<div className='bloc-centered'>
 							<div

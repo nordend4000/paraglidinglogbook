@@ -41,7 +41,7 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 	function saveHarness(e) {
 		e.preventDefault()
 		if (idToUpdate) {
-			return Axios.put("http://localhost:3001/updateHarness", {
+			return Axios.put(`${process.env.REACT_APP_DATABASE_URL}/updateHarness`, {
 				id: idToUpdate,
 				isHarness: isHarness,
 				harness: harness,
@@ -55,7 +55,7 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 				intitializeHarnessStates()
 			})
 		}
-		return Axios.post("http://localhost:3001/newHarness", {
+		return Axios.post(`${process.env.REACT_APP_DATABASE_URL}/newHarness`, {
 			isHarness: isHarness,
 			harness: harness,
 			harnessBrand: harnessBrand,
@@ -71,23 +71,25 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 	function handleEditHarness(id) {
 		setIdToUpdate(id)
 		setAddHarness(true)
-		Axios.get(`http://localhost:3001/getHarness/${id}`).then(response => {
-			setSelectValue(response.data.isHarness ? "harness" : "parachute")
-			setIsHarness(response.data.isHarness)
-			setHarness(response.data.harness || "")
-			setParachute(response.data.parachute || "")
-			setParachuteBrand(response.data.parachuteBrand || "")
-			setHarnessBrand(response.data.parachuteBrand || "")
-			setPurchaseHarness(
-				format(new Date(response.data.purchaseHarness), "yyyy-MM-dd") || "",
-			)
-			setPurchaseParachute(
-				format(new Date(response.data.purchaseParachute), "yyyy-MM-dd") || "",
-			)
-			setControlParachute(
-				format(new Date(response.data.controlParachute), "yyyy-MM-dd") || "",
-			)
-		})
+		Axios.get(`${process.env.REACT_APP_DATABASE_URL}/getHarness/${id}`).then(
+			response => {
+				setSelectValue(response.data.isHarness ? "harness" : "parachute")
+				setIsHarness(response.data.isHarness)
+				setHarness(response.data.harness || "")
+				setParachute(response.data.parachute || "")
+				setParachuteBrand(response.data.parachuteBrand || "")
+				setHarnessBrand(response.data.parachuteBrand || "")
+				setPurchaseHarness(
+					format(new Date(response.data.purchaseHarness), "yyyy-MM-dd") || "",
+				)
+				setPurchaseParachute(
+					format(new Date(response.data.purchaseParachute), "yyyy-MM-dd") || "",
+				)
+				setControlParachute(
+					format(new Date(response.data.controlParachute), "yyyy-MM-dd") || "",
+				)
+			},
+		)
 	}
 	function intitializeHarnessStates() {
 		getHarnessList()

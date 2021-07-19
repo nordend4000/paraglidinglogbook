@@ -48,7 +48,7 @@ function Profile({
 	function saveProfile(e) {
 		e.preventDefault()
 		if (idToUpdate) {
-			return Axios.put("http://localhost:3001/updateProfile", {
+			return Axios.put(`${process.env.REACT_APP_DATABASE_URL}/updateProfile`, {
 				id: idToUpdate,
 				totalHours: totalHours,
 				flightNumber: flightNumber,
@@ -56,7 +56,7 @@ function Profile({
 				initializeProfileStates()
 			})
 		}
-		return Axios.post("http://localhost:3001/newProfile", {
+		return Axios.post(`${process.env.REACT_APP_DATABASE_URL}/newProfile`, {
 			totalHours: totalHours,
 			flightNumber: flightNumber,
 		}).then(() => {
@@ -84,71 +84,75 @@ function Profile({
 						<FlyLogo />
 						MY PROFILE
 					</h2>
-					<div className='year-stat'>
-						<div className='total-profile-break'>
-							<div className='year typo'>My Statistic</div>
-							<div className='total-profile-line'>
-								Total Flight Time :
-								<span className='total-profile-data'>
-									{formatTime(getTotalTime(listAll, profileList))}
-								</span>
-							</div>
-							<div className='total-profile-line'>
-								Number of flights :
-								<span className='total-profile-data'>
-									{getTotalNumber(listAll, profileList)}
-								</span>
-							</div>
-						</div>
-						<div className='total-profile-break'>
-							<div className='total-profile-line-small'>
-								Longest flight :
-								<span className='total-profile-data'>
-									{getHigherDuration(listAll)} minutes
-								</span>
-							</div>
-							<div className='total-profile-line-small'>
-								Altitude Max :
-								<span className='total-profile-data'>
-									{getHigherAltitude(listAll)} m
-								</span>
-							</div>
-							<div className='total-profile-line-small'>
-								Farest flight :
-								<span className='total-profile-data'>
-									{getHigherDistance(listAll)} km
-								</span>
-							</div>
-						</div>
-					</div>
-					<div className='year-stat'>
-						<YearStatistic yearList={getYearFlight(listAll)} year={year} />
-						<YearStatistic
-							yearList={getYearBeforeFlight(listAll)}
-							year={year - 1}
-						/>
-					</div>
-					<div className='bloc-centered'>
-						{profileList && (
-							<div className=''>
-								<span className='total-profile-line'>
-									My initial data before using this log book :
-								</span>
-								<div className='total-profile-line-small'>
-									Total Time before :
-									<span className='total-profile-data'>
-										{formatTime(profileList[0].totalHours)}
-									</span>
+					{listAll && (
+						<>
+							<div className='year-stat'>
+								<div className='total-profile-break'>
+									<div className='year typo'>My Statistic</div>
+									<div className='total-profile-line'>
+										Total Flight Time :
+										<span className='total-profile-data'>
+											{formatTime(getTotalTime(listAll, profileList))}
+										</span>
+									</div>
+									<div className='total-profile-line'>
+										Number of flights :
+										<span className='total-profile-data'>
+											{getTotalNumber(listAll, profileList)}
+										</span>
+									</div>
 								</div>
-								<div className='total-profile-line-small'>
-									Number of flights before :
-									<span className='total-profile-data'>
-										{profileList[0].flightNumber}
-									</span>
+								<div className='total-profile-break'>
+									<div className='total-profile-line-small'>
+										Longest flight :
+										<span className='total-profile-data'>
+											{getHigherDuration(listAll)} minutes
+										</span>
+									</div>
+									<div className='total-profile-line-small'>
+										Altitude Max :
+										<span className='total-profile-data'>
+											{getHigherAltitude(listAll)} m
+										</span>
+									</div>
+									<div className='total-profile-line-small'>
+										Farest flight :
+										<span className='total-profile-data'>
+											{getHigherDistance(listAll)} km
+										</span>
+									</div>
 								</div>
 							</div>
-						)}
-					</div>
+							<div className='year-stat'>
+								<YearStatistic yearList={getYearFlight(listAll)} year={year} />
+								<YearStatistic
+									yearList={getYearBeforeFlight(listAll)}
+									year={year - 1}
+								/>
+							</div>
+							<div className='bloc-centered'>
+								{profileList && (
+									<div className=''>
+										<span className='total-profile-line'>
+											My initial data before using this log book :
+										</span>
+										<div className='total-profile-line-small'>
+											Total Time before :
+											<span className='total-profile-data'>
+												{formatTime(profileList[0].totalHours)}
+											</span>
+										</div>
+										<div className='total-profile-line-small'>
+											Number of flights before :
+											<span className='total-profile-data'>
+												{profileList[0].flightNumber}
+											</span>
+										</div>
+									</div>
+								)}
+							</div>
+						</>
+					)}
 					{addProfile && (
 						<>
 							<form className='' onSubmit={e => saveProfile(e)}>
