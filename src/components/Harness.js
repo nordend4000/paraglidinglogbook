@@ -36,6 +36,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 	function handleCancel() {
 		setAddHarness(false)
 		setIdToUpdate("")
+		setSelectValue("")
+		setIsHarness(true)
 	}
 
 	function saveHarness(e) {
@@ -118,10 +120,10 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 						MY HARNESS & PARACHUTE
 					</h2>
 					{harnessList.map(harness => (
-						<div className='glider-list-contener'>
+						<div className='glider-list-contener' key={harness._id}>
 							<div className='harness-list'>
 								<div className='gliders-list-hours'>
-									{harness.isHarness ? "Harness" : "Parachute"}
+									<b>{harness.isHarness ? "Harness" : "Parachute"}</b>
 								</div>
 								<div className='gliders-list-glider  typo'>
 									<span className='gliders-list-brand'>
@@ -134,7 +136,9 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 							</div>
 							<div className='control-glider'>
 								<div>
-									<span className='spacing-right'>Date of purchase :</span>
+									<span className='spacing-right'>
+										<b>Date of purchase :</b>
+									</span>
 									{harness.isHarness
 										? format(new Date(harness.purchaseHarness), "d MMMM yyyy")
 										: format(
@@ -145,7 +149,7 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 								{!harness.isHarness && (
 									<div>
 										<span className='spacing-right'>
-											Last Parachute Folding :
+											<b>Last Parachute Folding :</b>
 										</span>
 										{format(new Date(harness.controlParachute), "d MMMM yyyy")}
 									</div>
@@ -197,13 +201,12 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 							</div>
 							<div className='bloc-centered'>
 								<form onSubmit={e => saveHarness(e)}>
-									<div className=''>
+									<div>
 										{isHarness ? (
 											<>
 												<div>
-													<label className=''>Harness Model :</label>
+													<label>Harness Model :</label>
 													<input
-														className=''
 														type='text'
 														placeholder='Enter your Harness model ...'
 														value={harness}
@@ -212,9 +215,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 													/>
 												</div>
 												<div>
-													<label className=''>Harness Brand :</label>
+													<label>Harness Brand :</label>
 													<input
-														className=''
 														type='text'
 														placeholder='Enter your Harness brand ...'
 														value={harnessBrand}
@@ -223,9 +225,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 													/>
 												</div>
 												<div>
-													<label className=''>Date of Purchase :</label>
+													<label>Date of Purchase :</label>
 													<input
-														className=''
 														type='date'
 														value={purchaseHarness}
 														onChange={e => setPurchaseHarness(e.target.value)}
@@ -236,9 +237,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 										) : (
 											<>
 												<div>
-													<label className=''>Parachute Model :</label>
+													<label>Parachute Model :</label>
 													<input
-														className='large-input'
 														type='text'
 														placeholder='Enter your Parachute model ...'
 														value={parachute}
@@ -247,9 +247,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 													/>
 												</div>
 												<div>
-													<label className=''>Parachute Brand :</label>
+													<label>Parachute Brand :</label>
 													<input
-														className='large-input'
 														type='text'
 														placeholder='Enter your Parachute brand ...'
 														value={parachuteBrand}
@@ -258,9 +257,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 													/>
 												</div>
 												<div>
-													<label className=''>Date of Purchase :</label>
+													<label>Date of Purchase :</label>
 													<input
-														className='large-input'
 														type='date'
 														value={purchaseParachute}
 														onChange={e => setPurchaseParachute(e.target.value)}
@@ -268,9 +266,8 @@ function Harness({ open, onClose, harnessList, getHarnessList, handleDelete }) {
 													/>
 												</div>
 												<div>
-													<label className=''>Last Folding :</label>
+													<label>Last Folding :</label>
 													<input
-														className='large-input'
 														type='date'
 														value={controlParachute}
 														onChange={e => setControlParachute(e.target.value)}

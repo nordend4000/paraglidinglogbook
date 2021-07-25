@@ -27,20 +27,20 @@ function Profile({
 	getProfileList,
 }) {
 	const [addProfile, setAddProfile] = useState(false)
-	const [flightNumber, setFlightNumber] = useState(null)
-	const [spotNumber, setSpotNumber] = useState(null)
-	const [totalHours, setTotalHours] = useState(null)
-	const [idToUpdate, setIdToUpdate] = useState(null)
+	const [flightNumber, setFlightNumber] = useState("")
+	const [spotNumber, setSpotNumber] = useState("")
+	const [totalHours, setTotalHours] = useState("")
+	const [idToUpdate, setIdToUpdate] = useState("")
 
 	if (!open) return null
 	const year = getYear(new Date())
 
 	function handleEditProfile() {
-		setIdToUpdate(profileList.length > 0 ? profileList[0]._id : null)
+		setIdToUpdate(profileList.length > 0 ? profileList[0]._id : "")
+		setTotalHours(profileList.length > 0 ? profileList[0].totalHours : 0)
+		setFlightNumber(profileList.length > 0 ? profileList[0].flightNumber : 0)
+		setSpotNumber(profileList.length > 0 ? profileList[0].spotNumber : 0)
 		setAddProfile(true)
-		setTotalHours(profileList.length > 0 ? profileList[0].totalHours : null)
-		setFlightNumber(profileList.length > 0 ? profileList[0].flightNumber : null)
-		setSpotNumber(profileList.length > 0 ? profileList[0].spotNumber : null)
 	}
 	function handleCancel() {
 		setAddProfile(false)
@@ -48,17 +48,17 @@ function Profile({
 	}
 	function saveProfile(e) {
 		e.preventDefault()
-		if (idToUpdate != null) {
+		if (idToUpdate !== "") {
 			let newTotalHours = totalHours
 			let newFlightNumber = flightNumber
 			let newSpotNumber = spotNumber
-			if (profileList[0].totalHours && totalHours === null) {
+			if (profileList.length > 0 && totalHours === 0) {
 				newTotalHours = profileList[0].totalHours
 			}
-			if (profileList[0].flightNumber && flightNumber === null) {
+			if (profileList.length > 0 && flightNumber === 0) {
 				newFlightNumber = profileList[0].flightNumber
 			}
-			if (profileList[0].spotNumber && spotNumber === null) {
+			if (profileList.length > 0 && spotNumber === 0) {
 				newSpotNumber = profileList[0].spotNumber
 			}
 
@@ -121,7 +121,7 @@ function Profile({
 									<div className='total-profile-line'>
 										Number of Spots :
 										<span className='total-profile-data'>
-											{profileList[0].spotNumber}
+											{profileList.length > 0 ? profileList[0].spotTotal : "0"}
 										</span>
 									</div>
 								</div>
@@ -172,9 +172,7 @@ function Profile({
 								<div className='total-profile-line-small'>
 									Number of flights before :
 									<span className='total-profile-data'>
-										{profileList.length > 0
-											? formatTime(profileList[0].flightNumber)
-											: "0"}
+										{profileList.length > 0 ? profileList[0].flightNumber : "0"}
 									</span>
 								</div>
 								<div className='total-profile-line-small'>

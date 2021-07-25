@@ -4,6 +4,7 @@
 }
 .typo {
 	font-family: SciFly-Sans;
+	letter-spacing: 3px;
 }
 h1 {
 	color: #549ad0;
@@ -277,7 +278,7 @@ textarea {
 	font-family: SciFly-Sans;
 	border: 1px solid #88acc7;
 	border-radius: 10px;
-	padding: 6px;
+	padding: 8px;
 	padding-top: -10px;
 }
 .gpx:hover {

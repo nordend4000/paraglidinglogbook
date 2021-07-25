@@ -58,7 +58,7 @@ function App() {
 	const [selectGlider, setSelectGlider] = useState([])
 	const [profileList, setProfileList] = useState([])
 	const [currentPage, setCurrentPage] = useState(0)
-	const [totalPage, setTotalPage] = useState(10)
+	const [totalPage, setTotalPage] = useState(0)
 	const [file, setFile] = useState("")
 	const [url, setUrl] = useState("")
 	const [original_filename, setOriginal_filename] = useState("")
@@ -131,8 +131,12 @@ function App() {
 				original_filename: newOriginal_filename,
 				newSpot: newSpot,
 			}).then(() => {
-				if (newSpot !== updateNewSpot && newSpot) addNewSpot(1)
-				if (newSpot !== updateNewSpot && !newSpot) addNewSpot(-1)
+				if (newSpot !== updateNewSpot && newSpot) {
+					addNewSpot(1)
+				}
+				if (newSpot !== updateNewSpot && !newSpot) {
+					addNewSpot(-1)
+				}
 				intitializeStates()
 			})
 		}
@@ -164,7 +168,7 @@ function App() {
 	}
 	function handleEdit(id) {
 		setIdToUpdate(id)
-		setOpenForm(true)
+
 		Axios.get(`${process.env.REACT_APP_DATABASE_URL}/get/${id}`).then(
 			response => {
 				setTakeOff(response.data.takeOff || "")
@@ -189,6 +193,7 @@ function App() {
 				setUpdateNewSpot(response.data.newSpot)
 			},
 		)
+		setOpenForm(true)
 	}
 	function handleDelete(id, path, message) {
 		if (!window.confirm(`Do you really want to delete your ${message} ?`)) {
@@ -358,14 +363,15 @@ function App() {
 		setTakeOff(takeOff)
 		setDate(date)
 	}
-	function addNewSpot(x) {
-		const newTotal = profileList.spotNumber + x
-		const id = profileList._id
-		Axios.post(`${process.env.REACT_APP_DATABASE_URL}/addNewSpot`, {
-			spotNumber: newTotal,
-			id: id,
+	function addNewSpot(action) {
+		Axios.put(`${process.env.REACT_APP_DATABASE_URL}/addNewSpot`, {
+			spotTotal: profileList[0].spotTotal + action,
+			id: profileList[0]._id,
+		}).then(() => {
+			intitializeStates()
 		})
 	}
+
 	function intitializeStates() {
 		setTakeOff("")
 		setWindDir("")

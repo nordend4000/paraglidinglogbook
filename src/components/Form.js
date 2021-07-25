@@ -77,7 +77,7 @@ function Form({
 					<input
 						type='checkbox'
 						className='checkbox'
-						value={newSpot}
+						checked={newSpot}
 						onChange={e => setNewSpot(e.target.checked)}
 					/>
 				</div>

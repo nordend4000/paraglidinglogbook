@@ -94,9 +94,15 @@ function Gliders({
 						MY GLIDERS
 					</h2>
 					<div className='gliders-list-title'>
-						<div className='gliders-list-title-glider'>Glider</div>
-						<div className='gliders-list-title-hour'>Actual Hours</div>
-						<div className='gliders-list-title-hour'>Initial Hours</div>
+						<div className='gliders-list-title-glider typo'>
+							<b>Glider</b>
+						</div>
+						<div className='gliders-list-title-hour typo'>
+							<b>Actual Hours</b>
+						</div>
+						<div className='gliders-list-title-hour typo'>
+							<b>Initial Hours</b>
+						</div>
 					</div>
 					{gliderList.map(glider => (
 						<div className='glider-list-contener' key={glider.control}>
@@ -106,9 +112,11 @@ function Gliders({
 									{glider.glider}
 								</div>
 								<div className='gliders-list-hours typo'>
-									{formatTime(
-										getGliderFlightTime(glider.glider, gliderList, listAll),
-									)}
+									<b>
+										{formatTime(
+											getGliderFlightTime(glider.glider, gliderList, listAll),
+										)}
+									</b>
 								</div>
 								<div className='gliders-list-hours  typo'>
 									<span className='initial-hours'>{glider.hours} h</span>
@@ -116,11 +124,11 @@ function Gliders({
 							</div>
 							<div className='control-glider'>
 								<div>
-									Date of purchase :{" "}
+									<b>Date of purchase : </b>
 									{format(new Date(glider.purchase), "d MMMM yyyy")}
 								</div>
 								<div>
-									Last glider control :{" "}
+									<b>Last glider control : </b>
 									{format(new Date(glider.control), "d MMMM yyyy")}
 								</div>
 								<div className='crud-glider'>
