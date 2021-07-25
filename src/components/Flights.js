@@ -76,7 +76,9 @@ function Flights({
 						</div>
 						<div className='flight-data'>{element.startTime}</div>
 						<div className='flight-data'>{element.duration}</div>
-						<div className='flight-data'>{element.takeOff}</div>
+						<div className={element.newSpot ? "new-takeoff" : "flight-data"}>
+							{element.takeOff}
+						</div>
 						<div className='flight-data'>{element.windDir || "-"}</div>
 						<div className='flight-data'>{element.windSpeed || "-"}</div>
 						<div className='flight-data'>{element.above || "-"}</div>
@@ -104,27 +106,33 @@ function Flights({
 						</div>
 					</div>
 					<div className='row-comment-glider'>
-						{element.url && (
-							<div
-								className='gpx'
-								onClick={() =>
-									handleOpenMap(
-										element.url,
-										element.original_filename,
-										element.takeOff,
-										element.date,
-									)
-								}>
-								GPX
-							</div>
-						)}
-						<div className='half-row'>
-							<span className='row-comment-glider-header'>Glider : </span>
-							{element.selectedGlider || "-"}
+						<div className='gpx-tier'>
+							{element.url && (
+								<span
+									className='gpx'
+									onClick={() =>
+										handleOpenMap(
+											element.url,
+											element.original_filename,
+											element.takeOff,
+											element.date,
+										)
+									}>
+									GPX
+								</span>
+							)}
 						</div>
-						<div className='half-row comments-overflow'>
+						<div className='glider-tier'>
+							<span className='row-comment-glider-header'>Glider : </span>
+							<span className='row-comment-glider-wing'>
+								{element.selectedGlider || "-"}
+							</span>
+						</div>
+						<div className='comment-tier'>
 							<span className='row-comment-glider-header'>Comment :</span>
-							{element.comments || "-"}
+							<span className='row-comment-glider-text'>
+								{element.comments || "-"}
+							</span>
 						</div>
 					</div>
 				</div>

@@ -64,6 +64,8 @@ function App() {
 	const [original_filename, setOriginal_filename] = useState("")
 	const [public_id, setPublic_id] = useState("")
 	const [openMap, setOpenMap] = useState(false)
+	const [newSpot, setNewSpot] = useState(false)
+	const [updateNewSpot, setUpdateNewSpot] = useState(false)
 
 	useEffect(() => {
 		getFlightsList()
@@ -100,7 +102,6 @@ function App() {
 				newOriginal_filename = response.data.original_filename
 			})
 		}
-
 		if (idToUpdate) {
 			if (newUrl === "") newUrl = url
 			if (newPublic_id === "") newPublic_id = public_id
@@ -128,7 +129,10 @@ function App() {
 				url: newUrl,
 				public_id: newPublic_id,
 				original_filename: newOriginal_filename,
+				newSpot: newSpot,
 			}).then(() => {
+				if (newSpot !== updateNewSpot && newSpot) addNewSpot(1)
+				if (newSpot !== updateNewSpot && !newSpot) addNewSpot(-1)
 				intitializeStates()
 			})
 		}
@@ -152,7 +156,9 @@ function App() {
 			url: newUrl,
 			public_id: newPublic_id,
 			original_filename: newOriginal_filename,
+			newSpot: newSpot,
 		}).then(() => {
+			if (newSpot) addNewSpot(1)
 			intitializeStates()
 		})
 	}
@@ -179,6 +185,8 @@ function App() {
 				setUrl(response.data.url || "")
 				setOriginal_filename(response.data.original_filename || "")
 				setPublic_id(response.data.public_id || "")
+				setNewSpot(response.data.newSpot)
+				setUpdateNewSpot(response.data.newSpot)
 			},
 		)
 	}
@@ -225,6 +233,7 @@ function App() {
 	function getProfileList() {
 		Axios.get(`${process.env.REACT_APP_DATABASE_URL}/profile`).then(
 			response => {
+				console.log(response.data)
 				setProfileList(response.data)
 			},
 		)
@@ -350,6 +359,14 @@ function App() {
 		setTakeOff(takeOff)
 		setDate(date)
 	}
+	function addNewSpot(x) {
+		const newTotal = profileList.spotNumber + x
+		const id = profileList._id
+		Axios.post(`${process.env.REACT_APP_DATABASE_URL}/addNewSpot`, {
+			spotNumber: newTotal,
+			id: id,
+		})
+	}
 	function intitializeStates() {
 		setTakeOff("")
 		setWindDir("")
@@ -389,6 +406,8 @@ function App() {
 		setOriginal_filename("")
 		setUrl("")
 		setFile("")
+		setNewSpot(false)
+		setUpdateNewSpot(false)
 	}
 
 	return (
@@ -500,6 +519,8 @@ function App() {
 					selectedGlider={selectedGlider}
 					setFile={setFile}
 					original_filename={original_filename}
+					setNewSpot={setNewSpot}
+					newSpot={newSpot}
 				/>
 			)}
 			{openGliders && (

@@ -1,7 +1,6 @@
 import React from "react"
 import {
 	getTotalTime,
-	getTotalNumber,
 	getHigherDuration,
 	getHigherAltitude,
 	getHigherDistance,
@@ -20,9 +19,7 @@ function YearStatistic({ yearList, year }) {
 			</div>
 			<div className='total-profile-line'>
 				Number of flights :
-				<span className='total-profile-data'>
-					{getTotalNumber(yearList, [])}
-				</span>
+				<span className='total-profile-data'>{yearList.length}</span>
 			</div>
 			<div className='total-profile-line'></div>
 			<div className='total-profile-line-small'>

@@ -23,6 +23,7 @@ export function getYearBeforeFlight(list) {
 			isAfter(new Date(flight.date), lastDay) === false,
 	)
 }
+/*
 export function getTotalNumber(list, profileList) {
 	let totalNumber = 0
 	if (profileList.length > 0) {
@@ -31,6 +32,7 @@ export function getTotalNumber(list, profileList) {
 	const lastFlightNumber = getHigherNumber(list)
 	return (totalNumber = totalNumber + lastFlightNumber)
 }
+*/
 export function getHigherNumber(list) {
 	return list.reduce(
 		(acc, shot) => (acc = acc > shot.number ? acc : shot.number),
@@ -80,4 +82,7 @@ export function formatTime(time) {
 	if (h === 0) return `${min} min`
 	if (min === 0) return `${h} h`
 	return `${h} h ${min} min`
+}
+export function getSpotsNumber(list, profileList) {
+	const beforeSpots = profileList.spotNumber
 }

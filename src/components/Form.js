@@ -43,6 +43,8 @@ function Form({
 	speed,
 	setFile,
 	original_filename,
+	newSpot,
+	setNewSpot,
 }) {
 	if (!open) return null
 	return ReactDom.createPortal(
@@ -58,17 +60,27 @@ function Form({
 					<FlyLogo />
 					{idToUpdate ? "UPDATE MY FLIGHT :" : "CREATE A NEW FLIGHT :"}
 				</h2>
-				<select
-					value={selectedGlider}
-					onChange={e => setSelectedGlider(e.target.value)}
-					placeholder='glider'>
-					<option>Select your glider</option>
-					{selectGlider.map(glider => (
-						<option key={glider} value={glider}>
-							{glider}
-						</option>
-					))}
-				</select>
+				<div className='centered-form'>
+					<select
+						value={selectedGlider}
+						onChange={e => setSelectedGlider(e.target.value)}
+						placeholder='glider'>
+						<option>Select your glider</option>
+						{selectGlider.map(glider => (
+							<option key={glider} value={glider}>
+								{glider}
+							</option>
+						))}
+					</select>
+
+					<label className='label-checkbox'>New Spot :</label>
+					<input
+						type='checkbox'
+						className='checkbox'
+						value={newSpot}
+						onChange={e => setNewSpot(e.target.checked)}
+					/>
+				</div>
 				<form className='form' onSubmit={e => submitForm(e)}>
 					<div className='input-group'>
 						<div>
@@ -152,6 +164,7 @@ function Form({
 							<input
 								type='number'
 								placeholder='Max climb in m/s...'
+								step='.1'
 								value={climb}
 								onChange={e => setClimb(e.target.value)}
 							/>
@@ -161,6 +174,7 @@ function Form({
 							<input
 								type='number'
 								placeholder='Max sink in m/s...'
+								step='.1'
 								value={sink}
 								onChange={e => setSink(e.target.value)}
 							/>
@@ -170,6 +184,7 @@ function Form({
 							<input
 								type='number'
 								placeholder='Max speed in km/h...'
+								step='.1'
 								value={speed}
 								onChange={e => setSpeed(e.target.value)}
 							/>
@@ -179,6 +194,7 @@ function Form({
 							<input
 								type='number'
 								placeholder='Distance in Km ...'
+								step='.1'
 								value={distance}
 								onChange={e => setDistance(e.target.value)}
 							/>
