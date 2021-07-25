@@ -233,7 +233,6 @@ function App() {
 	function getProfileList() {
 		Axios.get(`${process.env.REACT_APP_DATABASE_URL}/profile`).then(
 			response => {
-				console.log(response.data)
 				setProfileList(response.data)
 			},
 		)
