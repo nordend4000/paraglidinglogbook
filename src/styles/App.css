@@ -278,8 +278,7 @@ textarea {
 	font-family: SciFly-Sans;
 	border: 1px solid #88acc7;
 	border-radius: 10px;
-	padding: 8px;
-	padding-top: -10px;
+	padding: 7px;
 }
 .gpx:hover {
 	color: #186dad;
