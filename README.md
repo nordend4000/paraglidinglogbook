@@ -1,10 +1,18 @@
-# paragliding-logbook
+# Paragliding Logbook
 
-## Project to learn the MERN stack :
+App to store Paragliding flights, compute statistic and manage gear
 
-- React App for front end : single page app + modals
-- REST API with Express/Node.js deployed on Heroku
-- Basic Crud Operations with Atlas Mongo DB/Mongoose
-- Advanced Database fonctionalities using Search/Sort/Limit/Skip
-- Upload & Hosting .gpx File on CLOUDINARY for flights data
+# https://paraglidinglogbook.netlify.app
+
+Front End :
+
+- React APP using create-react-app hosted on Netlify
+- Dependencies : Date-fns / axios / react-icons
+- Upload & Hosting .gpx File on CLOUDINARY for flights tracking
 - Display dynamically the saved flight using Leaflet/leaflet-react/leaflet-gpx
+
+Back End :
+
+- Rest API : Node.js + express + axios
+- Database : MongoDB + mongoose
+- Reminder emails using Nodemailer scheduled with node-cron
