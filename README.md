@@ -15,4 +15,3 @@ Back End :
 
 - Rest API : Node.js + express + axios
 - Database : MongoDB + mongoose
-- Reminder emails using Nodemailer scheduled with node-cron
