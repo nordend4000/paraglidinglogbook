@@ -2,7 +2,12 @@
 
 App to store Paragliding flights, compute statistic and manage gear
 
-# https://paraglidinglogbook.netlify.app
+<a href="https://paraglidinglogbook.netlify.app"><img src="https://res.cloudinary.com/dokbrxcp2/image/upload/v1647001279/images/logbook_copie_joybfe.png" alt="Paragliding Logbook"/></a>
+
+### https://paraglidinglogbook.netlify.app
+
+<img src="https://res.cloudinary.com/dokbrxcp2/image/upload/v1647005685/images/logbook_copie_2_hic3mo.png" alt="Paragliding Logbook stack"/>
+
 
 Front End :
 
