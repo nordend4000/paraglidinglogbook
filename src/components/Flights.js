@@ -10,9 +10,10 @@ function Flights({
 	handleSortBtn,
 	handleOpenMap,
 }) {
+	//test redeploy 2023
 	return (
 		<div className=''>
-			<h1 className=' typo'>MY FLIGHTS </h1>
+			<h1 className='typo'>MY FLIGHTS </h1>
 			<div className='grid-container flight-row'>
 				<div
 					className='table-flight sort-click'
